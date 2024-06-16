@@ -12,6 +12,8 @@
                     <th>Название организации</th>
                     <th>ИНН</th>
                     <th>Юр. адрес</th>
+                    <th>Недостоверность сведений</th>
+                    <th>Описание причины признания недостоверности сведений</th>
                     <th>Действия</th>
                 </tr>
             </thead>
@@ -22,6 +24,8 @@
                         <td>{{$organization->name}}</td>
                         <td>{{$organization->inn}}</td>
                         <td>{{$organization->address}}</td>
+                        <td>{{$organization->unreliability ? 'Сведения недостоверны' : 'Сведения достоверны'}}</td>
+                        <td>{{$organization->unreliability_description}}</td>
                         <td>
                             <div class="item-actions">
                                 <a class="button" href="/{{$organization->uuid}}/check">Проверить</a>

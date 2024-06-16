@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
+/**
+ * @mixin IdeHelperOrganization
+ */
 class Organization extends Model
 {
     use HasFactory;
@@ -14,6 +17,9 @@ class Organization extends Model
     protected $primaryKey = 'uuid';
     protected $keyType = 'string';
     public $incrementing = false;
+    protected $casts = [
+        'unreliability' => 'boolean'
+    ];
 
     protected static function booted(): void
     {

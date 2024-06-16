@@ -2,16 +2,20 @@
 
 namespace App\Http\Controllers\Organizations;
 
+use App\DTO\OrganizationCheckers\CheckResponseDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Organization\CreateRequest;
 use App\Http\Requests\Organization\UpdateRequest;
 use App\Models\Organization;
+use App\Services\OrganizationCheckers\CheckerServiceInterface;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class OrganizationController extends Controller
 {
+    public function __construct(private readonly CheckerServiceInterface $service) {}
+
     public function list()
     {
         $organizations = Organization::all();
@@ -59,6 +63,23 @@ class OrganizationController extends Controller
     public function delete(string $uuid): RedirectResponse
     {
         Organization::query()->find($uuid)->delete();
+        return redirect()->route('dashboard');
+    }
+
+    public function check(string $uuid): RedirectResponse
+    {
+        try {
+            /** @var Organization $organization */
+            $organization = Organization::query()->findOrFail($uuid);
+        } catch (ModelNotFoundException) {
+            return back();
+        }
+        /** @var CheckResponseDTO $dto */
+        $dto = $this->service->check($organization);
+        $organization->update([
+            'unreliability' => $dto->isNotValid(),
+            'unreliability_description' => $dto->getDescription(),
+        ]);
         return redirect()->route('dashboard');
     }
 }

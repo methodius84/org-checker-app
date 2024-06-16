@@ -10,6 +10,7 @@ Route::post('/store', [OrganizationController::class, 'store'])->middleware('aut
 Route::get('/{organization}/edit', [OrganizationController::class, 'editView'])->middleware('auth')->name('edit_form');
 Route::patch('/edit', [OrganizationController::class, 'edit'])->middleware('auth')->name('update');
 Route::delete('{organization}/delete', [OrganizationController::class, 'delete'])->middleware('auth')->name('delete');
+Route::get('/{organization}/check', [OrganizationController::class, 'check'])->middleware('auth')->name('check');
 
 Route::get('/login', [LoginController::class, 'loginPage'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login_attempt');

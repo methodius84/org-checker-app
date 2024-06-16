@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+    'checko' => [
+        'api_key' => env('CHECKO_API_KEY'),
+        'base_uri' => env('CHECKO_BASE_URI'),
+    ],
+
 ];
