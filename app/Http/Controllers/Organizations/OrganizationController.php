@@ -23,7 +23,7 @@ class OrganizationController extends Controller
         return view('dashboard', compact('organizations'));
     }
 
-    public function create(Request $request)
+    public function create()
     {
         return view('organizations.create');
     }
@@ -45,7 +45,7 @@ class OrganizationController extends Controller
         try {
             $organization = Organization::query()->where('uuid', $uuid)->firstOrFail();
         } catch (ModelNotFoundException $e) {
-            return back();
+            return back()->withErrors(['organization' => 'Organization not found.']);
         }
         return view('organizations.edit', compact('organization'));
     }

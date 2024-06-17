@@ -8,6 +8,11 @@
             {{ $message }}
         </div>
         @enderror
+        @error('organization')
+        <div class="errors">
+            {{ $message }}
+        </div>
+        @enderror
         <div class="actions">
             <a href="{{route('create')}}" class="button">Create organization</a>
         </div>
