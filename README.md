@@ -6,6 +6,13 @@ This is Organization Checker, used to validate organization address through open
 
 ### Launch the server
 ```bash
+# migrations
+php artisan migrate
+
+# seed test user with password
+php artisan db:seed DatabaseSeeder
+
+# launch
 npm run build
 php artisan serve
 ```
