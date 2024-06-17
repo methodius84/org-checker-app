@@ -3,6 +3,7 @@
 namespace App\Jobs\Organizations;
 
 use App\DTO\OrganizationCheckers\CheckResponseDTO;
+use App\Exceptions\InvalidInnException;
 use App\Models\Organization;
 use App\Services\OrganizationCheckers\CheckerServiceInterface;
 use Illuminate\Bus\Batchable;
@@ -12,6 +13,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Log;
 
 class CheckUnreliabilityJob implements ShouldQueue
 {
@@ -29,11 +31,23 @@ class CheckUnreliabilityJob implements ShouldQueue
     {
         /** @var CheckerServiceInterface $service */
         $service = App::make(CheckerServiceInterface::class);
-        /** @var CheckResponseDTO $result */
-        $result = $service->check($this->organization);
-        $this->organization->update([
-            'unreliability' => $result->isNotValid(),
-            'unreliability_description' => $result->getDescription()
-        ]);
+        try {
+            /** @var CheckResponseDTO $result */
+            $result = $service->check($this->organization);
+            $this->organization->update([
+                'unreliability' => $result->isNotValid(),
+                'unreliability_description' => $result->getDescription()
+            ]);
+        } catch (InvalidInnException $exception) {
+            $uuid = $this->organization->uuid;
+            $error = $exception->getMessage();
+            $code = $exception->getCode();
+            $message = <<<EOT
+Failed job of checking organization: $uuid
+Code: $code
+Message: $error
+EOT;
+            Log::error($message);
+        }
     }
 }

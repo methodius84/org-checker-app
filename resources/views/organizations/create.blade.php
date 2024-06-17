@@ -1,10 +1,10 @@
 @extends('app')
 @section('title', 'Create Organization')
 @section('content')
-    <div>
-        <a href="/" class="button">Back</a>
+    <div class="button-container">
+        <a href="{{route('dashboard')}}" class="button">&#8592; Back</a>
     </div>
-    <form method="POST" action="{{route('store')}}">
+    <form class="create-form" method="POST" action="{{route('store')}}">
         @csrf
         <div>
             <label for="name">Название:</label>
@@ -27,6 +27,8 @@
                 <span style="color: red">{{$message}}</span>
             @enderror
         </div>
-        <button type="submit" class="button">Создать</button>
+        <div class="button-container">
+            <button type="submit" class="button">Создать</button>
+        </div>
     </form>
 @endsection

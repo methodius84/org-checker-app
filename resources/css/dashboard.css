@@ -1,9 +1,16 @@
 .dashboard {
+    padding: 1em;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    .errors {
+        text-align: center;
+        color: white;
+        background-color: red;
+        border: 1px solid red;
+    }
     .actions {
-        padding: 1em;
+        padding: 1em 0;
         display: flex;
         flex-direction: row;
         justify-content: end;

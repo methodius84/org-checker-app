@@ -3,6 +3,7 @@
 namespace App\Services\OrganizationCheckers\Checko;
 
 use App\DTO\OrganizationCheckers\CheckResponseDTO;
+use App\Exceptions\InvalidInnException;
 use App\Models\Organization;
 use App\Services\OrganizationCheckers\CheckerServiceInterface;
 use GuzzleHttp\Client;
@@ -22,6 +23,7 @@ final class CheckoService implements CheckerServiceInterface
      * @param Organization $organization
      * @return CheckResponseDTO
      * @throws GuzzleException
+     * @throws InvalidInnException
      */
     public function check(Organization $organization): CheckResponseDTO
     {
@@ -29,6 +31,10 @@ final class CheckoService implements CheckerServiceInterface
 
         $response = $this->client->get($url);
         $data = json_decode($response->getBody()->getContents(), true)['data'];
+
+        if (empty($data)) {
+            throw new InvalidInnException();
+        }
         $address = $data['ЮрАдрес'];
         return CheckResponseDTO::fromArray($address);
     }

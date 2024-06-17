@@ -1,10 +1,10 @@
 @extends('app')
 @section('title', 'Edit Organization')
 @section('content')
-    <div>
-        <a href="/" class="button">Back</a>
+    <div class="button-container">
+        <a href="/" class="button">&#8592; Back</a>
     </div>
-    <form method="POST" action="{{route('update')}}">
+    <form class="edit-form" method="POST" action="{{route('update')}}">
         @method('PATCH')
         @csrf
         <input type="hidden" name="uuid" value="{{ $organization->uuid }}">

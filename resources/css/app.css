@@ -1,5 +1,7 @@
 @import "login.css";
 @import "dashboard.css";
+@import "create_org.css";
+@import "edit_org.css";
 
 html, body {
     font-size: 14px;

@@ -24,7 +24,7 @@ class CreateRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'inn' => 'required|integer|unique:organizations,inn',
+            'inn' => 'required|digits:10|unique:organizations,inn',
             'address' => 'required|string',
         ];
     }

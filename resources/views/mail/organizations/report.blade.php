@@ -1,7 +1,35 @@
+<style>
+    .report-table {
+        border-collapse: collapse;
+        border: 1px solid black;
+        table-layout: auto;
+    }
+    th, td {
+        border: 1px solid black;
+        border-radius: 4px;
+        text-align: center;
+        vertical-align: middle;
+    }
+    th:nth-child(1), td:nth-child(1) {
+        width: 15%;
+    }
+    th:nth-child(2), td:nth-child(2) {
+        width: 15%;
+    }
+    th:nth-child(3), td:nth-child(3) {
+        width: 25%;
+    }
+    th:nth-child(4), td:nth-child(4) {
+        width: 15%;
+    }
+    th:nth-child(5), td:nth-child(5) {
+        width: 30%;
+    }
+</style>
 <div id="report">
     <h3>Еженедельный отчет об организациях:</h3>
     <br>
-    <table>
+    <table class="report-table">
         <thead>
             <tr>
                 <th>ИНН</th>
@@ -14,7 +42,9 @@
         <tbody>
             @if($organizations->count() === 0)
             <tr>
-                <td colspan="5">Нет организаций с недостоверными данными</td>
+                <td colspan="5" style="">
+                    Нет организаций с недостоверными данными
+                </td>
             </tr>
             @else
             @foreach($organizations as $organization)

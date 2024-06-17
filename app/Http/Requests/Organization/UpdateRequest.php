@@ -26,7 +26,7 @@ class UpdateRequest extends FormRequest
             'uuid' => 'required|uuid|exists:organizations,uuid',
             'name' => 'required|string',
             'address' => 'required|string',
-            'inn' => 'required|integer|unique:organizations,inn',
+            'inn' => 'required|digits:10|unique:organizations,inn',
         ];
     }
 }
