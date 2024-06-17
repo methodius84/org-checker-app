@@ -33,9 +33,9 @@
                         <td>{{$organization->unreliability_description}}</td>
                         <td>
                             <div class="item-actions">
-                                <a class="button" href="/{{$organization->uuid}}/check">Проверить</a>
-                                <a class="button" href="/{{$organization->uuid}}/edit">Изменить</a>
-                                <form action="/{{$organization->uuid}}/delete" method="post">
+                                <a class="button" href="{{ route('check', $organization->uuid) }}">Проверить</a>
+                                <a class="button" href="{{ route('edit', $organization->uuid) }}">Изменить</a>
+                                <form action="{{ route('delete', $organization->uuid) }}" method="post">
                                     @method('delete')
                                     @csrf
                                     <button class="button" type="submit">Удалить</button>
