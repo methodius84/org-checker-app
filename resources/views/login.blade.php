@@ -2,6 +2,11 @@
 @section('title', 'Login')
 @section('content')
     <div class="login-wrapper">
+        @error('error')
+        <div class="errors">
+            {{ $message }}
+        </div>
+        @enderror
         <form class="login-form" method="POST" action="{{route('login_attempt')}}">
             @csrf
             <div class="form-group">

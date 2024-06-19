@@ -26,6 +26,7 @@ class LoginController extends Controller
             $request->session()->regenerate();
             return redirect()->route('dashboard');
         }
+        return back()->withErrors(['error' => 'invalid credentials']);
     }
 
     public function logout(Request $request): RedirectResponse

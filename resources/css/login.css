@@ -3,8 +3,15 @@
     height: 100%;
     position: relative;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    .errors {
+        text-align: center;
+        color: white;
+        background-color: red;
+        border: 1px solid red;
+    }
     .login-form {
         display: flex;
         flex-direction: column;
