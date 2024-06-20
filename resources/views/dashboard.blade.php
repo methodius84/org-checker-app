@@ -51,7 +51,7 @@
                 @endforeach
             @else
                 <tr>
-                    <td colspan="4">No organizations found.</td>
+                    <td colspan="6">No organizations found.</td>
                 </tr>
             @endif
             </tbody>
