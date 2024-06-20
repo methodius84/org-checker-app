@@ -8,6 +8,11 @@
             {{ $message }}
         </div>
         @enderror
+        @if(session('status'))
+            <div class="alert-success">
+                {{ session('status') }}
+            </div>
+        @endif
         @error('organization')
         <div class="errors">
             {{ $message }}
@@ -15,6 +20,7 @@
         @enderror
         <div class="actions">
             <a href="{{route('create')}}" class="button">Create organization</a>
+            <a href="{{route('report')}}" class="button">Send weekly report</a>
         </div>
         <table class="organizations-table">
             <thead>

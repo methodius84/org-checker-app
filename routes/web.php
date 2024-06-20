@@ -14,6 +14,7 @@ Route::middleware('auth')->controller(OrganizationController::class)->group(func
         Route::patch('/edit', 'edit')->name('update');
         Route::delete('/{uuid}', 'delete')->name('delete');
         Route::get('/{uuid}/check', 'check')->name('check');
+        Route::get('check_all', 'checkAll')->name('report');
     });
 });
 
