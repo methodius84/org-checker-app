@@ -4,6 +4,7 @@ namespace App\Http\Requests\Organization;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class UpdateRequest extends FormRequest
 {
@@ -26,7 +27,7 @@ class UpdateRequest extends FormRequest
             'uuid' => 'required|uuid|exists:organizations,uuid',
             'name' => 'required|string',
             'address' => 'required|string',
-            'inn' => 'required|digits:10|unique:organizations,inn',
+            'inn' => 'required|digits:10|' . Rule::unique('organizations', 'inn')->ignore($this->get('uuid'), 'uuid'),
         ];
     }
 }
